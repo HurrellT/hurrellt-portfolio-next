@@ -1,0 +1,110 @@
+---
+
+---
+<!-- You may ask why I'm not using Tailwinds here? Because of the terrible performance it has. Don't believe me? Try it your self -->
+
+<!-- <style>
+  @tailwind base;
+  @tailwind components;
+  @tailwind utilities;
+
+  .cursor {
+    @apply w-7.5 h-7.5 border-2 border-white rounded-full fixed transform -translate-x-1/2 -translate-y-1/2 pointer-events-none z-50 mix-blend-difference transition-all duration-150 ease-in-out;
+  }
+
+  .cursor--hidden {
+    @apply opacity-0;
+  }
+
+  .cursor--clicked {
+    @apply transform scale-90 bg-white;
+  }
+
+  .cursor--link-hovered {
+    @apply transform scale-125 bg-white pointer-events-none;
+  }
+</style>
+-->
+
+<style>
+  .cursor {
+    width: 30px;
+    height: 30px;
+    border: 2px solid #fefefe;
+    border-radius: 100%;
+    position: fixed;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: difference;
+    transition: all 150ms ease;
+    transition-property: opacity, background-color, transform, mix-blend-mode;
+  }
+
+  .cursor--hidden {
+    opacity: 0;
+  }
+
+  .cursor--clicked {
+    transform: translate(-50%, -50%) scale(0.9);
+    background-color: #fefefe;
+  }
+
+  .cursor--link-hovered {
+    transform: translate(-50%, -50%) scale(1.25);
+    background-color: #fefefe;
+  }
+
+  .cursor--link-hovered-clicked {
+    transform: translate(-50%, -50%) scale(1);
+    background-color: #fefefe;
+  }
+</style>
+
+<script>
+  let cursor = document.querySelector(".cursor") as HTMLElement;
+  
+  function onMouseMove(e) {
+    let x = e.clientX;
+    let y = e.clientY;
+    
+    cursor.style.left = x + "px";
+    cursor.style.top = y + "px";
+  };
+
+  function onMouseDown() {
+    cursor.classList.add("cursor--clicked");
+  }
+
+  function onMouseUp() {
+    cursor.classList.remove("cursor--clicked");
+  }
+
+  function onMouseEnter() {
+    cursor.classList.remove("cursor--hidden");
+  }
+
+  function onMouseLeave() {
+    cursor.classList.add("cursor--hidden");
+  }
+  
+  // document.querySelectorAll("a, button, svg").forEach((el) => {
+  //   el.addEventListener("mouseover", () => cursor?.classList.add("cursor--link-hovered"));
+  //   el.addEventListener("mouseout", () => cursor?.classList.remove("cursor--link-hovered"));
+  // });
+
+  document.querySelectorAll("a, button, svg").forEach((el) => {
+    el.addEventListener("mousedown", () => cursor?.classList.add("cursor--link-hovered-clicked"));
+    el.addEventListener("mouseup", () => cursor?.classList.remove("cursor--link-hovered-clicked"));
+    el.addEventListener("mouseover", () => cursor?.classList.add("cursor--link-hovered"));
+    el.addEventListener("mouseout", () => cursor?.classList.remove("cursor--link-hovered"));
+  });
+  
+  document.addEventListener("mousemove", onMouseMove);
+  document.addEventListener("mousedown", onMouseDown);
+  document.addEventListener("mouseup", onMouseUp);
+  document.addEventListener("mouseenter", onMouseEnter);
+  document.addEventListener("mouseleave", onMouseLeave);
+</script>
+
+<div class="cursor" />
