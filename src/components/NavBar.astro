@@ -1,6 +1,7 @@
 ---
-import { Icon } from 'astro-icon/components'
+import { Github, Linkedin } from 'lucide-react'
 import { ThemeToggle } from './react/ThemeToggle.tsx'
+import { Button } from './ui/button'
 ---
 
 <nav class="backdrop-saturate-100 backdrop-blur-md flex items-center justify-between w-full max-w-full mx-auto px-64 bg-background-color text-base h-14 box-border fixed top-0 left-0 z-50">
@@ -11,28 +12,26 @@ import { ThemeToggle } from './react/ThemeToggle.tsx'
       href="https://www.linkedin.com/in/tomas-hurrell/"
       rel="noopener noreferrer"
     >
-      <button
+      <Button
         aria-label="LinkedIn"
-        class="flex items-center justify-center w-9 h-9 p-0 mx-2"
-        auto
-        type="abort"
+        variant="outline"
+        className='flex items-center justify-center w-10 h-10 p-2 mr-2'
       >
-        <Icon name="mdi:linkedin" size={32} aria-label="LinkedIn" />
-      </button>
+        <Linkedin className='h-[1.2rem] w-[1.2rem]' />
+      </Button>
     </a>
     <a
       target="_blank"
       href="https://github.com/hurrellt"
       rel="noopener noreferrer"
     >
-      <button
+      <Button
         aria-label="Github"
-        class="flex items-center justify-center w-9 h-9 p-0 mx-2"
-        auto
-        type="abort"
+        variant="outline"
+        className='flex items-center justify-center w-10 h-10 p-2 mr-2'
       >
-        <Icon name="mdi:github" size={32} aria-label="Github" />
-      </button>
+        <Github className='h-[1.2rem] w-[1.2rem]'/>
+      </Button>
     </a>
     <ThemeToggle client:load />
     <!-- <a target="" href="#theme">
