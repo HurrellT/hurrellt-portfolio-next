@@ -9,7 +9,12 @@ const { title, img, description } = data;
 ---
 <Card className='flex flex-col'>
   <div class="flex">
-    <img src={`/src/assets/${img}`} alt={title} class="w-full h-64 object-cover rounded-t-lg" />
+    <img 
+      src={`/src/assets/${img}`} 
+      alt={title} 
+      class="w-full h-64 object-cover rounded-t-lg"
+      transition:name={`${slug}-image`}
+    />
   </div>
   <CardHeader>
     <CardTitle>{title}</CardTitle>

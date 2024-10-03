@@ -14,7 +14,7 @@ export async function getStaticPaths() {
 }
 
 const { project } = Astro.props;
-const { data } = project;
+const { slug, data } = project;
 const { title, img, linkAvailable, link, sourcecodeAvailable, sourcecode } = data;
 
 const { Content } = await render(project);
@@ -23,10 +23,15 @@ const { Content } = await render(project);
 <Layout title={`${title} - Tomás Hurrell`}>
   <div class="my-32 px-4 md:px-16 lg:px-32 xl:px-64">
     <aside>
-      <img src={`/src/assets/${img}`} alt={title} class="h-auto object-cover rounded-lg" />
+      <img 
+        src={`/src/assets/${img}`} 
+        alt={title} 
+        class="h-auto object-cover rounded-lg"
+        transition:name={`${slug}-image`}
+      />
     </aside>
     <main class="mt-14 prose lg:prose-md dark:prose-invert">
-      <h1>{title}</h1>
+      <h1 transition:name={`${slug}-title`}>{title}</h1>
       <div>
         <Content />
       </div>
