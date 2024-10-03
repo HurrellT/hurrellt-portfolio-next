@@ -1,4 +1,5 @@
 ---
+import Footer from '@/components/Footer.astro';
 import ProjectCard from '@/components/ProjectCard.astro';
 import { Button } from '@/components/ui/button';
 import Layout from '@/layouts/Layout.astro';
@@ -30,19 +31,5 @@ const projects = await getCollection('projects');
 				})}
 			</div>
 		</div>
-	</section>
-	<section class="px-4 md:px-16 lg:px-32 xl:px-64">
-		<footer class="py-4 flex place-content-between place-items-center">
-			<p class="text-center md:text-left">Designed and built by me ©</p>
-			<a 
-				href="https://github.com/HurrellT/hurrellt-portfolio-next" 
-				target="_blank"
-				rel="noopener noreferrer">
-				<Button variant="outline" title='Source Code'>
-					<span class="pr-2">Source Code</span>
-					<Github className='h-[1.2rem] w-[1.2rem]' />
-				</Button>
-			</a>
-		</footer>
 	</section>
 </Layout>

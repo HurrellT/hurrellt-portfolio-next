@@ -1,6 +1,8 @@
 ---
+import { Button } from "@/components/ui/button";
 import Layout from "@/layouts/Layout.astro";
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
+import { Github, Globe } from "lucide-react";
 
 export async function getStaticPaths() {
   const projects = await getCollection("projects");
@@ -13,11 +15,43 @@ export async function getStaticPaths() {
 
 const { project } = Astro.props;
 const { data } = project;
-const { title } = data;
+const { title, img, linkAvailable, link, sourcecodeAvailable, sourcecode } = data;
+
+const { Content } = await render(project);
 ---
 
-<Layout title={title}>
-  <section>
-    <h1>{title}</h1>
-  </section>
+<Layout title={`${title} - Tomás Hurrell`}>
+  <div class="my-32 px-4 md:px-16 lg:px-32 xl:px-64">
+    <aside>
+      <img src={`/src/assets/${img}`} alt={title} class="h-auto object-cover rounded-lg" />
+    </aside>
+    <main class="mt-14 prose lg:prose-md dark:prose-invert">
+      <h1>{title}</h1>
+      <div>
+        <Content />
+      </div>
+    </main>
+    <section>
+      <div>
+        {linkAvailable && <a
+        target="_blank"
+        href={link}
+        rel="noopener noreferrer"
+        >
+          <Button variant="outline">
+            <span class="pr-2">Website</span><Globe />
+          </Button>
+        </a>}
+        {sourcecodeAvailable && <a
+        target="_blank"
+        href={sourcecode}
+        rel="noopener noreferrer"
+        >
+          <Button variant="outline">
+            <span class="pr-2">Source</span><Github />
+          </Button>
+        </a>}
+      </div>
+    </section>
+  </div>
 </Layout>

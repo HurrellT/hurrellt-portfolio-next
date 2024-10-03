@@ -7,6 +7,8 @@ const projects = defineCollection({
     description: z.string(),
     link: z.string().url(),
     sourcecode: z.string().url(),
+    linkAvailable: z.boolean(),
+    sourcecodeAvailable: z.boolean()
   }),
 });
 
