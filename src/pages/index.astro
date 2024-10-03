@@ -1,34 +1,48 @@
 ---
-import '@/styles/globals.css';
+import ProjectCard from '@/components/ProjectCard.astro';
+import { Button } from '@/components/ui/button';
+import Layout from '@/layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import { Github } from 'lucide-react';
 
-import Layout from '../layouts/Layout.astro';
+const projects = await getCollection('projects');
 ---
-<script is:inline>
-	const getThemePreference = () => {
-		if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
-			return localStorage.getItem('theme');
-		}
-		return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-	};
-	const isDark = getThemePreference() === 'dark';
-	document.documentElement.classList[isDark ? 'add' : 'remove']('dark');
-
-	if (typeof localStorage !== 'undefined') {
-		const observer = new MutationObserver(() => {
-			const isDark = document.documentElement.classList.contains('dark');
-			localStorage.setItem('theme', isDark ? 'dark' : 'light');
-		});
-		observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
-	}
-</script>
-
 <Layout title="Tomás Hurrell Portfolio">
-	<section class="p-64">
+	<section class="my-64 px-4 md:px-16 lg:px-32 xl:px-64">
 		<article class="prose lg:prose-xl dark:prose-invert">
 			<h1>Hi! I'm Tomás Hurrell</h1>
 			<p>I’m a passionate Team Lead and Front-End Lead Developer who loves expressing myself through the art of building beautiful and maintainable software, always keeping product, design and user experience in mind.</p>
 			<p>Musician and photography aficionado.</p>
 			<p>Constantly seeking improvement.</p>
 		</article>
+	</section>
+	<section class="mt-64 mb-6 px-4 md:px-16 lg:px-32 xl:px-64">
+		<article class="prose lg:prose-xl dark:prose-invert py-4">
+			<h3>Featured work</h3>
+		</article>
+		<div class="grid gap-4">
+			<ProjectCard project={projects.at(0)} />
+			<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
+				{projects.slice(1).map((project) => {
+					return (
+						<ProjectCard project={project} />
+					);
+				})}
+			</div>
+		</div>
+	</section>
+	<section class="px-4 md:px-16 lg:px-32 xl:px-64">
+		<footer class="py-4 flex place-content-between place-items-center">
+			<p class="text-center md:text-left">Designed and built by me ©</p>
+			<a 
+				href="https://github.com/HurrellT/hurrellt-portfolio-next" 
+				target="_blank"
+				rel="noopener noreferrer">
+				<Button variant="outline" title='Source Code'>
+					<span class="pr-2">Source Code</span>
+					<Github className='h-[1.2rem] w-[1.2rem]' />
+				</Button>
+			</a>
+		</footer>
 	</section>
 </Layout>
