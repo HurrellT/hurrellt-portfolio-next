@@ -62,7 +62,16 @@
 </style>
 
 <script>
+  const isMobile = () => {
+    const ua = navigator.userAgent;
+    return /Android|Mobi/i.test(ua);
+  };  
+
   let cursor = document.querySelector(".cursor") as HTMLElement;
+
+  if (typeof navigator !== 'undefined' && isMobile()) {
+    cursor.style.display = "none";
+  };
   
   function onMouseMove(e) {
     let x = e.clientX;
