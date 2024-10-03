@@ -25,6 +25,9 @@ export function ThemeToggle() {
       (theme === "system" &&
         window.matchMedia("(prefers-color-scheme: dark)").matches);
     document.documentElement.classList[isDark ? "add" : "remove"]("dark");
+    document.addEventListener('astro:page-load', () => {
+      document.documentElement.classList[isDark ? "add" : "remove"]("dark");
+    });
   }, [theme]);
 
   return (

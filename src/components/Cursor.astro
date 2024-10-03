@@ -62,53 +62,55 @@
 </style>
 
 <script>
-  const isMobile = () => {
-    const ua = navigator.userAgent;
-    return /Android|Mobi/i.test(ua);
-  };  
-
-  let cursor = document.querySelector(".cursor") as HTMLElement;
-
-  if (typeof navigator !== 'undefined' && isMobile()) {
-    cursor.style.display = "none";
-  };
+  document.addEventListener('astro:page-load', () => {
+    const isMobile = () => {
+      const ua = navigator.userAgent;
+      return /Android|Mobi/i.test(ua);
+    };  
   
-  function onMouseMove(e) {
-    let x = e.clientX;
-    let y = e.clientY;
+    let cursor = document.querySelector(".cursor") as HTMLElement;
+  
+    if (typeof navigator !== 'undefined' && isMobile()) {
+      cursor.style.display = "none";
+    };
     
-    cursor.style.left = x + "px";
-    cursor.style.top = y + "px";
-  };
-
-  function onMouseDown() {
-    cursor.classList.add("cursor--clicked");
-  }
-
-  function onMouseUp() {
-    cursor.classList.remove("cursor--clicked");
-  }
-
-  function onMouseEnter() {
-    cursor.classList.remove("cursor--hidden");
-  }
-
-  function onMouseLeave() {
-    cursor.classList.add("cursor--hidden");
-  }
-
-  document.querySelectorAll("a, button, svg").forEach((el) => {
-    el.addEventListener("mousedown", () => cursor?.classList.add("cursor--link-hovered-clicked"));
-    el.addEventListener("mouseup", () => cursor?.classList.remove("cursor--link-hovered-clicked"));
-    el.addEventListener("mouseover", () => cursor?.classList.add("cursor--link-hovered"));
-    el.addEventListener("mouseout", () => cursor?.classList.remove("cursor--link-hovered"));
-  });
+    function onMouseMove(e) {
+      let x = e.clientX;
+      let y = e.clientY;
+      
+      cursor.style.left = x + "px";
+      cursor.style.top = y + "px";
+    };
   
-  document.addEventListener("mousemove", onMouseMove);
-  document.addEventListener("mousedown", onMouseDown);
-  document.addEventListener("mouseup", onMouseUp);
-  document.addEventListener("mouseenter", onMouseEnter);
-  document.addEventListener("mouseleave", onMouseLeave);
+    function onMouseDown() {
+      cursor.classList.add("cursor--clicked");
+    }
+  
+    function onMouseUp() {
+      cursor.classList.remove("cursor--clicked");
+    }
+  
+    function onMouseEnter() {
+      cursor.classList.remove("cursor--hidden");
+    }
+  
+    function onMouseLeave() {
+      cursor.classList.add("cursor--hidden");
+    }
+  
+    document.querySelectorAll("a, button, svg").forEach((el) => {
+      el.addEventListener("mousedown", () => cursor?.classList.add("cursor--link-hovered-clicked"));
+      el.addEventListener("mouseup", () => cursor?.classList.remove("cursor--link-hovered-clicked"));
+      el.addEventListener("mouseover", () => cursor?.classList.add("cursor--link-hovered"));
+      el.addEventListener("mouseout", () => cursor?.classList.remove("cursor--link-hovered"));
+    });
+    
+    document.addEventListener("mousemove", onMouseMove);
+    document.addEventListener("mousedown", onMouseDown);
+    document.addEventListener("mouseup", onMouseUp);
+    document.addEventListener("mouseenter", onMouseEnter);
+    document.addEventListener("mouseleave", onMouseLeave);
+  });
 </script>
 
 <div class="cursor" />
