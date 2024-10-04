@@ -8,8 +8,14 @@ const projects = defineCollection({
     link: z.string().url(),
     sourcecode: z.string().url(),
     linkAvailable: z.boolean(),
-    sourcecodeAvailable: z.boolean()
+    sourcecodeAvailable: z.boolean(),
   }),
 });
 
-export const collections = { projects };
+const jobs = defineCollection({
+  schema: z.object({
+    name: z.string(),
+  }),
+});
+
+export const collections = { projects, jobs };

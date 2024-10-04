@@ -1,0 +1,14 @@
+---
+import { render } from "astro:content";
+import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
+
+const { experience } = Astro.props;
+const { data } = experience;
+const { name } = data;
+
+const { Content } = await render(experience);
+---
+<h1>{name}</h1> 
+<div class="mb-16">
+  <Content />
+</div>

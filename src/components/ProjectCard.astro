@@ -3,35 +3,27 @@ import { ChevronRight } from "lucide-react";
 import { Button } from "./ui/button";
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from "./ui/card";
 
-const { project } = Astro.props;
+const { project, imageClassName } = Astro.props;
 const { slug, data } = project;
 const { title, img, description } = data;
 ---
-<Card className='flex flex-col'>
-  <div class="flex">
-    <img 
-      src={`/images/${img}`} 
-      alt={title} 
-      class="w-full h-64 object-cover rounded-t-lg"
-      transition:name={`${slug}-image`}
-    />
-  </div>
-  <CardHeader>
-    <CardTitle>{title}</CardTitle>
-    <CardDescription>
-      {description}
-    </CardDescription>
-  </CardHeader>
-  {/* <CardContent>
-    <p>{description}</p>
-  </CardContent> */}
-  <CardFooter className='flex justify-end mt-auto'>
-    <a
-      href={`/project/${slug}`}
-    >
-      <Button variant="ghost">
-        <span class="pr-2">Read more</span><ChevronRight />
-      </Button>
-    </a>
-  </CardFooter>
-</Card>
+<a
+  href={`/project/${slug}`}
+> 
+  <Card className='flex flex-col transform transition-transform duration-300 hover:scale-105'>
+    <div class="flex">
+      <img 
+        src={`/images/${img}`} 
+        alt={title} 
+        class={`w-full h-64 object-cover rounded-t-lg ${imageClassName}`}
+        transition:name={`${slug}-image`}
+      />
+    </div>
+    <CardHeader>
+      <CardTitle>{title}</CardTitle>
+      <CardDescription>
+        {description}
+      </CardDescription>
+    </CardHeader>
+  </Card>
+</a>
