@@ -1,6 +1,8 @@
 # Tomás Hurrell Portfolio
 ### Built with Astro 5
 
+I've built this portfolio not only to update an refresh my previous portfolio, but mostly as an excuse to explore and play with Astro 5.
+
 install dependencies
 ```sh
 pnpm i
