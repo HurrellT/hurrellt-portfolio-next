@@ -6,8 +6,9 @@ import { Github, Globe } from "lucide-react";
 
 export async function getStaticPaths() {
   const projects = await getCollection("projects");
+  const personalProjects = await getCollection("personalProjects");
   
-  return projects.map((project) => ({
+  return [...projects, ...personalProjects].map((project) => ({
     params: { id: project.slug },
     props: { project },
   }));
